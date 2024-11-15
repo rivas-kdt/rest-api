@@ -1,13 +1,11 @@
 import { sql } from "@vercel/postgres";
 
-const qrdata = async (req, res) => {
+export default async function handler(req, res) {
   try {
-    const { qrdata } = await sql`SELECT * FROM qrdata;`;
-
-    res.status(200).send(qrdata);
+    const { rows } = await sql`SELECT * FROM qrdata;`
+    res.status(200).json(rows);
   } catch (error) {
-    res.status(500).send("Error getting documents: " + error.message);
+    console.error('Database query error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-};
-
-export default qrdata;
+}
