@@ -1,16 +1,13 @@
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const PORT = 3001;
+import { sql } from "@vercel/postgres";
 
-app.use(express.json());
-app.use(cors());
+const qrdata = async (req, res) => {
+  try {
+    const { qrdata } = await sql`SELECT * FROM qrdata;`;
 
-app.listen(PORT, () => {
-  console.log('Server is Running');
-});
+    res.status(200).send(qrdata);
+  } catch (error) {
+    res.status(500).send("Error getting documents: " + error.message);
+  }
+};
 
-
-const { qrdata } = require('../handler/qrdata');
-
-app.get('/', qrdata);
+export default qrdata;

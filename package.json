@@ -9,8 +9,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@vercel/postgres": "^0.10.0",
-    "cors": "^2.8.5",
-    "express": "^4.21.1"
+    "@vercel/postgres": "^0.10.0"
   }
 }
